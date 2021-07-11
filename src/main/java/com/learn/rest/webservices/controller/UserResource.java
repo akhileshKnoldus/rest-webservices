@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.learn.rest.webservices.bean.User;
 import com.learn.rest.webservices.dao.UserDaoService;
+import com.learn.rest.webservices.exception.UserNotFoundException;
 
 @RestController
 public class UserResource {
@@ -31,8 +32,8 @@ public class UserResource {
 	public User retrieveUser(@PathVariable int id) {
 		User user = service.findOne(id);
 		
-		//if(user==null)
-		//	throw new UserNotFoundException("id-"+ id);
+		if(user==null)
+			throw new UserNotFoundException("id-"+ id);
 		
 		return user;
 	}
@@ -41,8 +42,8 @@ public class UserResource {
 	public void deleteUser(@PathVariable int id) {
 		User user = service.deleteById(id);
 		
-		//if(user==null)
-		//	throw new UserNotFoundException("id-"+ id);		
+		if(user==null)
+			throw new UserNotFoundException("id-"+ id);		
 	}
 
 	//
